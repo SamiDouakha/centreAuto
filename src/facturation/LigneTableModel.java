@@ -62,6 +62,8 @@ public class LigneTableModel extends AbstractTableModel{
     
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
+        System.out.println("LigneTableModel 65 getValueAt rowIndex "+rowIndex);
+        System.out.println("LigneTableModel 66 getValueAt columnIndex "+rowIndex);
         switch(columnIndex){
            case 0:
                  return lignes.get(rowIndex).getPiece().getId_piece();
@@ -102,6 +104,16 @@ public class LigneTableModel extends AbstractTableModel{
         lignes.add(ligne);
         fireTableRowsInserted(lignes.size() -1, lignes.size() -1);
     }   
+    
+    public void addLigne(Piece p){
+        Ligne ligne =new Ligne();
+        ligne.setPiece(p);
+        ligne.setPrixUHT(p.getPrixVente());
+        ligne.setQuantite(0);
+        lignes.add(ligne);
+        fireTableRowsInserted(lignes.size() -1, lignes.size() -1);
+    }   
+    
     
     public void removeLigne(int rowIndex){
         lignes.remove(rowIndex);
