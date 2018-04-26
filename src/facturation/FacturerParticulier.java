@@ -794,7 +794,7 @@ public class FacturerParticulier extends javax.swing.JFrame implements Sujet{
 
     private void filtrePieceJTFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filtrePieceJTFActionPerformed
         
-        int column =2;
+        int column =3;
         
         String designation = this.filtrePieceJTF.getText().toUpperCase(Locale.FRANCE);
         
