@@ -599,6 +599,7 @@ public class FacturerParticulier extends javax.swing.JFrame implements Sujet{
 
     private void selectionnerParticulieJBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectionnerParticulieJBActionPerformed
         changeCard(this.selecteurParticulieJP,"selectProfessionnelCard");
+        facture.setClient(null);
     }//GEN-LAST:event_selectionnerParticulieJBActionPerformed
 
     private void particulierFactureJTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_particulierFactureJTableMouseClicked
