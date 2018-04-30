@@ -8,11 +8,11 @@ package facturation;
 import facturation.entities.Client;
 import facturation.entities.Facture;
 import facturation.entities.FactureParticulier;
+import facturation.entities.FactureProfessionnel;
 import facturation.entities.Ligne;
 import facturation.entities.Particulie;
 import facturation.entities.Piece;
 import facturation.entities.Professionnel;
-import facturation.formulaires.FormulaireLigne;
 import facturation.service.FacturationService;
 import facturation.service.FactureFileService;
 import java.awt.CardLayout;
@@ -32,12 +32,12 @@ import javax.swing.table.TableRowSorter;
  *
  * @author tayeb
  */
-public class FacturerParticulier extends javax.swing.JFrame implements Sujet{
+public class FacturerProfessionnel extends javax.swing.JFrame implements Sujet{
 
     
-    protected TableRowSorter<TableModel> sorterParticulierFacturation;
+    protected TableRowSorter<TableModel> sorterClientFacture;
     protected LigneTableModel modelLigne;
-    protected PieceTableModel modelSelectedPiece;
+    
     protected PieceTableModel modelPiece;
     protected ArrayList<Observateur> observateurs; 
     protected FacturationService fs;
@@ -49,18 +49,18 @@ public class FacturerParticulier extends javax.swing.JFrame implements Sujet{
     
     protected Professionnel selectedProfessionnel;  
     protected List<Ligne> lignes=new ArrayList<>();
-    protected FactureParticulier facture ;
+    protected FactureProfessionnel facture ;
     protected Client c;
     protected TableRowSorter sorterStock;
     
-    public FacturerParticulier( FacturationService fs, FactureFileService ffs) {
+    public FacturerProfessionnel( FacturationService fs, FactureFileService ffs) {
         
         
         
         modelPiece = new PieceTableModel();
-        modelSelectedPiece = new PieceTableModel();
+        
         modelLigne  = new LigneTableModel(lignes);
-        facture = new FactureParticulier(); 
+        facture = new FactureProfessionnel(); 
         
         Date d = new Date();
         SimpleDateFormat dateFormatter = new SimpleDateFormat("dd/MM/yyyy");
@@ -75,13 +75,17 @@ public class FacturerParticulier extends javax.swing.JFrame implements Sujet{
         this.fs =fs;
         this.ffs = ffs;
         
-        this.sorterParticulierFacturation = new TableRowSorter<>(this.particulierFactureJTable.getModel());
-        this.particulierFactureJTable.setRowSorter(sorterParticulierFacturation);
+        
         
         this.stockJTable.setModel(modelPiece);
         
         this.sorterStock = new TableRowSorter<>(this.stockJTable.getModel());
         this.stockJTable.setRowSorter(sorterStock);
+        
+        this.sorterClientFacture = new TableRowSorter<>(this.professionnelFactureJTable.getModel());
+        this.professionnelFactureJTable.setRowSorter(sorterClientFacture);
+        
+        observateurs= new ArrayList<>();
         
         observateurs= new ArrayList<>();
         this.setLocationRelativeTo(null);
@@ -101,26 +105,26 @@ public class FacturerParticulier extends javax.swing.JFrame implements Sujet{
         entityManager = java.beans.Beans.isDesignTime() ? null : javax.persistence.Persistence.createEntityManagerFactory("centre_auto_piece_PUN").createEntityManager();
         pieceQuery = java.beans.Beans.isDesignTime() ? null : entityManager.createQuery("SELECT p FROM Piece p WHERE p.quantite > 0");
         pieceList = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : org.jdesktop.observablecollections.ObservableCollections.observableList(pieceQuery.getResultList());
-        particulieQuery = java.beans.Beans.isDesignTime() ? null : entityManager.createQuery("SELECT p FROM Particulie  p");
-        particulielList = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : org.jdesktop.observablecollections.ObservableCollections.observableList(particulieQuery.getResultList());
+        professionnelQuery = java.beans.Beans.isDesignTime() ? null : entityManager.createQuery("SELECT p FROM Professionnel p");
+        professionnelList = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : org.jdesktop.observablecollections.ObservableCollections.observableList(professionnelQuery.getResultList());
         modePayementBG = new javax.swing.ButtonGroup();
-        facturerParticulieJP = new javax.swing.JPanel();
-        conteneurParticulieJP = new javax.swing.JPanel();
-        selecteurParticulieJP = new javax.swing.JPanel();
-        selectParticulieFactureCardJP = new javax.swing.JPanel();
-        nomParticulierFactureJTF = new javax.swing.JTextField();
-        nomFactureJL = new javax.swing.JLabel();
-        particulierFactureJSP = new javax.swing.JScrollPane();
-        particulierFactureJTable = new javax.swing.JTable();
-        modificationParticulieFactureCardJP = new javax.swing.JPanel();
-        prenomJL = new javax.swing.JLabel();
-        nomJL = new javax.swing.JLabel();
-        nomTitreJL = new javax.swing.JLabel();
-        prenomTitreJL = new javax.swing.JLabel();
+        facturerPorfessionnelJP = new javax.swing.JPanel();
+        conteneurProfessionnelJP = new javax.swing.JPanel();
+        selecteurProfessionnelJP = new javax.swing.JPanel();
+        selectProfessionnelFactureCardJP = new javax.swing.JPanel();
+        nomSocieteFactureJTF = new javax.swing.JTextField();
+        nomSocieteFactureJL = new javax.swing.JLabel();
+        professionnelFactureJSP = new javax.swing.JScrollPane();
+        professionnelFactureJTable = new javax.swing.JTable();
+        modificationProfessionnelFactureCardJP = new javax.swing.JPanel();
+        nomSocieteJL = new javax.swing.JLabel();
+        siretJL = new javax.swing.JLabel();
         lieuJL = new javax.swing.JLabel();
         cpJL = new javax.swing.JLabel();
         villeJL = new javax.swing.JLabel();
-        selectionnerParticulieJB = new javax.swing.JButton();
+        selectionnerProfessionnelJB = new javax.swing.JButton();
+        nomSocieteTitreJL = new javax.swing.JLabel();
+        siretTitreJL = new javax.swing.JLabel();
         lieuTitreJL = new javax.swing.JLabel();
         cpTitreJL = new javax.swing.JLabel();
         villeTiteJL = new javax.swing.JLabel();
@@ -142,40 +146,38 @@ public class FacturerParticulier extends javax.swing.JFrame implements Sujet{
         impressionFactureJB = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Facturer un particulier");
+        setTitle("Facturer un professionnel");
         setSize(new java.awt.Dimension(900, 720));
 
-        facturerParticulieJP.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        facturerParticulieJP.setMaximumSize(new java.awt.Dimension(900, 720));
-        facturerParticulieJP.setPreferredSize(new java.awt.Dimension(900, 720));
+        facturerPorfessionnelJP.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        facturerPorfessionnelJP.setMaximumSize(new java.awt.Dimension(900, 720));
+        facturerPorfessionnelJP.setPreferredSize(new java.awt.Dimension(900, 720));
 
-        selecteurParticulieJP.setLayout(new java.awt.CardLayout());
+        selecteurProfessionnelJP.setLayout(new java.awt.CardLayout());
 
-        selectParticulieFactureCardJP.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Choisir un particulier", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.TOP));
+        selectProfessionnelFactureCardJP.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Choisir un particulier", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.TOP));
 
-        nomParticulierFactureJTF.setColumns(40);
-        nomParticulierFactureJTF.addActionListener(new java.awt.event.ActionListener() {
+        nomSocieteFactureJTF.setColumns(40);
+        nomSocieteFactureJTF.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                nomParticulierFactureJTFActionPerformed(evt);
+                nomSocieteFactureJTFActionPerformed(evt);
             }
         });
 
-        nomFactureJL.setText("Filtrer par nom");
+        nomSocieteFactureJL.setText("Filtrer par nom de la société");
 
-        particulierFactureJTable.setRowSorter(sorterParticulierFacturation);
+        professionnelFactureJTable.setRowSorter(sorterClientFacture);
 
-        org.jdesktop.swingbinding.JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, particulielList, particulierFactureJTable);
+        org.jdesktop.swingbinding.JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, professionnelList, professionnelFactureJTable);
         org.jdesktop.swingbinding.JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${id}"));
-        columnBinding.setColumnName("N° Particulier");
+        columnBinding.setColumnName("N° Professionel");
         columnBinding.setColumnClass(Long.class);
         columnBinding.setEditable(false);
-        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${nom}"));
-        columnBinding.setColumnName("Nom");
-        columnBinding.setColumnClass(String.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${siret}"));
+        columnBinding.setColumnName("SIRET");
         columnBinding.setEditable(false);
-        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${prenom}"));
-        columnBinding.setColumnName("Prénom");
-        columnBinding.setColumnClass(String.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${nomSociete}"));
+        columnBinding.setColumnName("Socièté");
         columnBinding.setEditable(false);
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${adresse.lieu}"));
         columnBinding.setColumnName("Lieu");
@@ -191,70 +193,70 @@ public class FacturerParticulier extends javax.swing.JFrame implements Sujet{
         columnBinding.setEditable(false);
         bindingGroup.addBinding(jTableBinding);
         jTableBinding.bind();
-        particulierFactureJTable.addMouseListener(new java.awt.event.MouseAdapter() {
+        professionnelFactureJTable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                particulierFactureJTableMouseClicked(evt);
+                professionnelFactureJTableMouseClicked(evt);
             }
         });
-        particulierFactureJSP.setViewportView(particulierFactureJTable);
+        professionnelFactureJSP.setViewportView(professionnelFactureJTable);
 
-        javax.swing.GroupLayout selectParticulieFactureCardJPLayout = new javax.swing.GroupLayout(selectParticulieFactureCardJP);
-        selectParticulieFactureCardJP.setLayout(selectParticulieFactureCardJPLayout);
-        selectParticulieFactureCardJPLayout.setHorizontalGroup(
-            selectParticulieFactureCardJPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(selectParticulieFactureCardJPLayout.createSequentialGroup()
+        javax.swing.GroupLayout selectProfessionnelFactureCardJPLayout = new javax.swing.GroupLayout(selectProfessionnelFactureCardJP);
+        selectProfessionnelFactureCardJP.setLayout(selectProfessionnelFactureCardJPLayout);
+        selectProfessionnelFactureCardJPLayout.setHorizontalGroup(
+            selectProfessionnelFactureCardJPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(selectProfessionnelFactureCardJPLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(selectParticulieFactureCardJPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(particulierFactureJSP, javax.swing.GroupLayout.DEFAULT_SIZE, 948, Short.MAX_VALUE)
-                    .addGroup(selectParticulieFactureCardJPLayout.createSequentialGroup()
-                        .addComponent(nomFactureJL)
+                .addGroup(selectProfessionnelFactureCardJPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(professionnelFactureJSP, javax.swing.GroupLayout.DEFAULT_SIZE, 948, Short.MAX_VALUE)
+                    .addGroup(selectProfessionnelFactureCardJPLayout.createSequentialGroup()
+                        .addComponent(nomSocieteFactureJL)
                         .addGap(18, 18, 18)
-                        .addComponent(nomParticulierFactureJTF, javax.swing.GroupLayout.PREFERRED_SIZE, 331, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(nomSocieteFactureJTF, javax.swing.GroupLayout.PREFERRED_SIZE, 331, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
-        selectParticulieFactureCardJPLayout.setVerticalGroup(
-            selectParticulieFactureCardJPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(selectParticulieFactureCardJPLayout.createSequentialGroup()
+        selectProfessionnelFactureCardJPLayout.setVerticalGroup(
+            selectProfessionnelFactureCardJPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(selectProfessionnelFactureCardJPLayout.createSequentialGroup()
                 .addGap(19, 19, 19)
-                .addGroup(selectParticulieFactureCardJPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(nomFactureJL)
-                    .addComponent(nomParticulierFactureJTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(selectProfessionnelFactureCardJPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(nomSocieteFactureJL)
+                    .addComponent(nomSocieteFactureJTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(particulierFactureJSP, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(professionnelFactureJSP, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
-        selecteurParticulieJP.add(selectParticulieFactureCardJP, "selectProfessionnelCard");
+        selecteurProfessionnelJP.add(selectProfessionnelFactureCardJP, "selectProfessionnelCard");
 
-        modificationParticulieFactureCardJP.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        modificationParticulieFactureCardJP.setPreferredSize(new java.awt.Dimension(745, 136));
+        modificationProfessionnelFactureCardJP.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        modificationProfessionnelFactureCardJP.setPreferredSize(new java.awt.Dimension(745, 136));
 
-        org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, particulierFactureJTable, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.prenom}"), prenomJL, org.jdesktop.beansbinding.BeanProperty.create("text"));
+        org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, professionnelFactureJTable, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.nom}"), nomSocieteJL, org.jdesktop.beansbinding.BeanProperty.create("text"));
         bindingGroup.addBinding(binding);
 
-        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, particulierFactureJTable, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.nom}"), nomJL, org.jdesktop.beansbinding.BeanProperty.create("text"));
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, professionnelFactureJTable, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.prenom}"), siretJL, org.jdesktop.beansbinding.BeanProperty.create("text"));
         bindingGroup.addBinding(binding);
 
-        nomTitreJL.setText("Nom");
-
-        prenomTitreJL.setText("Prenom");
-
-        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, particulierFactureJTable, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.adresse.lieu}"), lieuJL, org.jdesktop.beansbinding.BeanProperty.create("text"));
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, professionnelFactureJTable, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.adresse.lieu}"), lieuJL, org.jdesktop.beansbinding.BeanProperty.create("text"));
         bindingGroup.addBinding(binding);
 
-        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, particulierFactureJTable, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.adresse.cp}"), cpJL, org.jdesktop.beansbinding.BeanProperty.create("text"));
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, professionnelFactureJTable, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.adresse.cp}"), cpJL, org.jdesktop.beansbinding.BeanProperty.create("text"));
         bindingGroup.addBinding(binding);
 
-        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, particulierFactureJTable, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.adresse.ville}"), villeJL, org.jdesktop.beansbinding.BeanProperty.create("text"));
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, professionnelFactureJTable, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.adresse.ville}"), villeJL, org.jdesktop.beansbinding.BeanProperty.create("text"));
         bindingGroup.addBinding(binding);
 
-        selectionnerParticulieJB.setText("retour au choix du client");
-        selectionnerParticulieJB.addActionListener(new java.awt.event.ActionListener() {
+        selectionnerProfessionnelJB.setText("retour au choix du client");
+        selectionnerProfessionnelJB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                selectionnerParticulieJBActionPerformed(evt);
+                selectionnerProfessionnelJBActionPerformed(evt);
             }
         });
+
+        nomSocieteTitreJL.setText("Société");
+
+        siretTitreJL.setText("N° SIRET");
 
         lieuTitreJL.setText("Lieu");
 
@@ -262,94 +264,96 @@ public class FacturerParticulier extends javax.swing.JFrame implements Sujet{
 
         villeTiteJL.setText("Ville");
 
-        javax.swing.GroupLayout modificationParticulieFactureCardJPLayout = new javax.swing.GroupLayout(modificationParticulieFactureCardJP);
-        modificationParticulieFactureCardJP.setLayout(modificationParticulieFactureCardJPLayout);
-        modificationParticulieFactureCardJPLayout.setHorizontalGroup(
-            modificationParticulieFactureCardJPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(modificationParticulieFactureCardJPLayout.createSequentialGroup()
-                .addGroup(modificationParticulieFactureCardJPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(modificationParticulieFactureCardJPLayout.createSequentialGroup()
+        javax.swing.GroupLayout modificationProfessionnelFactureCardJPLayout = new javax.swing.GroupLayout(modificationProfessionnelFactureCardJP);
+        modificationProfessionnelFactureCardJP.setLayout(modificationProfessionnelFactureCardJPLayout);
+        modificationProfessionnelFactureCardJPLayout.setHorizontalGroup(
+            modificationProfessionnelFactureCardJPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(modificationProfessionnelFactureCardJPLayout.createSequentialGroup()
+                .addGroup(modificationProfessionnelFactureCardJPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(modificationProfessionnelFactureCardJPLayout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(cpTitreJL)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(cpJL))
-                    .addGroup(modificationParticulieFactureCardJPLayout.createSequentialGroup()
+                    .addGroup(modificationProfessionnelFactureCardJPLayout.createSequentialGroup()
                         .addGap(12, 12, 12)
-                        .addComponent(nomTitreJL)
+                        .addComponent(nomSocieteTitreJL)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(nomJL, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(modificationParticulieFactureCardJPLayout.createSequentialGroup()
+                        .addComponent(nomSocieteJL, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(modificationProfessionnelFactureCardJPLayout.createSequentialGroup()
                         .addGap(12, 12, 12)
-                        .addComponent(prenomTitreJL)
+                        .addComponent(siretTitreJL)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(prenomJL, javax.swing.GroupLayout.PREFERRED_SIZE, 372, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(modificationParticulieFactureCardJPLayout.createSequentialGroup()
+                        .addComponent(siretJL, javax.swing.GroupLayout.PREFERRED_SIZE, 372, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(modificationProfessionnelFactureCardJPLayout.createSequentialGroup()
                         .addGap(12, 12, 12)
                         .addComponent(lieuTitreJL)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lieuJL)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(modificationParticulieFactureCardJPLayout.createSequentialGroup()
+            .addGroup(modificationProfessionnelFactureCardJPLayout.createSequentialGroup()
                 .addGap(12, 12, 12)
                 .addComponent(villeTiteJL)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(villeJL)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(selectionnerParticulieJB, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(selectionnerProfessionnelJB, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
-        modificationParticulieFactureCardJPLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {cpJL, lieuJL, nomJL, prenomJL, villeJL});
+        modificationProfessionnelFactureCardJPLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {cpJL, lieuJL, nomSocieteJL, siretJL, villeJL});
 
-        modificationParticulieFactureCardJPLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {cpTitreJL, lieuTitreJL, nomTitreJL, prenomTitreJL, villeTiteJL});
+        modificationProfessionnelFactureCardJPLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {cpTitreJL, lieuTitreJL, nomSocieteTitreJL, siretTitreJL, villeTiteJL});
 
-        modificationParticulieFactureCardJPLayout.setVerticalGroup(
-            modificationParticulieFactureCardJPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(modificationParticulieFactureCardJPLayout.createSequentialGroup()
+        modificationProfessionnelFactureCardJPLayout.setVerticalGroup(
+            modificationProfessionnelFactureCardJPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(modificationProfessionnelFactureCardJPLayout.createSequentialGroup()
                 .addGap(12, 12, 12)
-                .addGroup(modificationParticulieFactureCardJPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(modificationParticulieFactureCardJPLayout.createSequentialGroup()
-                        .addGroup(modificationParticulieFactureCardJPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(modificationParticulieFactureCardJPLayout.createSequentialGroup()
-                                .addGroup(modificationParticulieFactureCardJPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(nomTitreJL)
-                                    .addComponent(nomJL, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
-                                .addGroup(modificationParticulieFactureCardJPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(prenomTitreJL)
-                                    .addComponent(prenomJL, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(modificationProfessionnelFactureCardJPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(modificationProfessionnelFactureCardJPLayout.createSequentialGroup()
+                        .addGroup(modificationProfessionnelFactureCardJPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(modificationProfessionnelFactureCardJPLayout.createSequentialGroup()
+                                .addGroup(modificationProfessionnelFactureCardJPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(nomSocieteTitreJL)
+                                    .addComponent(nomSocieteJL, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(12, 12, 12)
+                                .addGroup(modificationProfessionnelFactureCardJPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(siretTitreJL)
+                                    .addComponent(siretJL, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(12, 12, 12)
                                 .addComponent(lieuJL))
                             .addComponent(lieuTitreJL))
                         .addGap(12, 12, 12)
                         .addComponent(cpJL))
                     .addComponent(cpTitreJL))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(modificationParticulieFactureCardJPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(modificationParticulieFactureCardJPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(villeJL)
-                        .addComponent(villeTiteJL))
-                    .addComponent(selectionnerParticulieJB))
+                .addGap(12, 12, 12)
+                .addGroup(modificationProfessionnelFactureCardJPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(villeJL)
+                    .addComponent(villeTiteJL))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, modificationProfessionnelFactureCardJPLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(selectionnerProfessionnelJB)
+                .addContainerGap())
         );
 
-        modificationParticulieFactureCardJPLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {cpJL, cpTitreJL, lieuJL, lieuTitreJL, nomJL, nomTitreJL, prenomJL, prenomTitreJL, villeJL, villeTiteJL});
+        modificationProfessionnelFactureCardJPLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {cpJL, cpTitreJL, lieuJL, lieuTitreJL, nomSocieteJL, nomSocieteTitreJL, siretJL, siretTitreJL, villeJL, villeTiteJL});
 
-        selecteurParticulieJP.add(modificationParticulieFactureCardJP, "modificationProfessionnelJPCard");
+        selecteurProfessionnelJP.add(modificationProfessionnelFactureCardJP, "modificationProfessionnelJPCard");
 
-        javax.swing.GroupLayout conteneurParticulieJPLayout = new javax.swing.GroupLayout(conteneurParticulieJP);
-        conteneurParticulieJP.setLayout(conteneurParticulieJPLayout);
-        conteneurParticulieJPLayout.setHorizontalGroup(
-            conteneurParticulieJPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(conteneurParticulieJPLayout.createSequentialGroup()
+        javax.swing.GroupLayout conteneurProfessionnelJPLayout = new javax.swing.GroupLayout(conteneurProfessionnelJP);
+        conteneurProfessionnelJP.setLayout(conteneurProfessionnelJPLayout);
+        conteneurProfessionnelJPLayout.setHorizontalGroup(
+            conteneurProfessionnelJPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(conteneurProfessionnelJPLayout.createSequentialGroup()
                 .addGap(0, 0, 0)
-                .addComponent(selecteurParticulieJP, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(selecteurProfessionnelJP, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        conteneurParticulieJPLayout.setVerticalGroup(
-            conteneurParticulieJPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(conteneurParticulieJPLayout.createSequentialGroup()
+        conteneurProfessionnelJPLayout.setVerticalGroup(
+            conteneurProfessionnelJPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(conteneurProfessionnelJPLayout.createSequentialGroup()
                 .addGap(5, 5, 5)
-                .addComponent(selecteurParticulieJP, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(selecteurProfessionnelJP, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -524,39 +528,40 @@ public class FacturerParticulier extends javax.swing.JFrame implements Sujet{
             }
         });
 
-        javax.swing.GroupLayout facturerParticulieJPLayout = new javax.swing.GroupLayout(facturerParticulieJP);
-        facturerParticulieJP.setLayout(facturerParticulieJPLayout);
-        facturerParticulieJPLayout.setHorizontalGroup(
-            facturerParticulieJPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(facturerParticulieJPLayout.createSequentialGroup()
-                .addGap(136, 136, 136)
-                .addComponent(impressionFactureJB)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(sauvegardeFactureJB)
-                .addGap(87, 87, 87))
-            .addGroup(facturerParticulieJPLayout.createSequentialGroup()
-                .addGap(12, 12, 12)
-                .addGroup(facturerParticulieJPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(selecteurPieceJP, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(facturerParticulieJPLayout.createSequentialGroup()
-                        .addComponent(conteneurParticulieJP, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(facturerParticulieJPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(factureMPJPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(dateLivraisonJDateChooser, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE))))
+        javax.swing.GroupLayout facturerPorfessionnelJPLayout = new javax.swing.GroupLayout(facturerPorfessionnelJP);
+        facturerPorfessionnelJP.setLayout(facturerPorfessionnelJPLayout);
+        facturerPorfessionnelJPLayout.setHorizontalGroup(
+            facturerPorfessionnelJPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, facturerPorfessionnelJPLayout.createSequentialGroup()
+                .addGroup(facturerPorfessionnelJPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(facturerPorfessionnelJPLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(impressionFactureJB)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(sauvegardeFactureJB))
+                    .addGroup(facturerPorfessionnelJPLayout.createSequentialGroup()
+                        .addGap(12, 12, 12)
+                        .addGroup(facturerPorfessionnelJPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(selecteurPieceJP, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(facturerPorfessionnelJPLayout.createSequentialGroup()
+                                .addComponent(conteneurProfessionnelJP, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(facturerPorfessionnelJPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(factureMPJPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(dateLivraisonJDateChooser, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                 .addGap(2, 2, 2))
         );
 
-        facturerParticulieJPLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {dateLivraisonJDateChooser, factureMPJPanel});
+        facturerPorfessionnelJPLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {dateLivraisonJDateChooser, factureMPJPanel});
 
-        facturerParticulieJPLayout.setVerticalGroup(
-            facturerParticulieJPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(facturerParticulieJPLayout.createSequentialGroup()
-                .addGroup(facturerParticulieJPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addGroup(facturerParticulieJPLayout.createSequentialGroup()
+        facturerPorfessionnelJPLayout.setVerticalGroup(
+            facturerPorfessionnelJPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(facturerPorfessionnelJPLayout.createSequentialGroup()
+                .addGroup(facturerPorfessionnelJPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(facturerPorfessionnelJPLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(conteneurParticulieJP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(facturerParticulieJPLayout.createSequentialGroup()
+                        .addComponent(conteneurProfessionnelJP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(facturerPorfessionnelJPLayout.createSequentialGroup()
                         .addGap(21, 21, 21)
                         .addComponent(dateLivraisonJDateChooser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -564,7 +569,7 @@ public class FacturerParticulier extends javax.swing.JFrame implements Sujet{
                 .addGap(18, 18, 18)
                 .addComponent(selecteurPieceJP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(facturerParticulieJPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(facturerPorfessionnelJPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(sauvegardeFactureJB)
                     .addComponent(impressionFactureJB))
                 .addContainerGap())
@@ -574,13 +579,13 @@ public class FacturerParticulier extends javax.swing.JFrame implements Sujet{
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(facturerParticulieJP, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1189, Short.MAX_VALUE)
+            .addComponent(facturerPorfessionnelJP, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1189, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, 0)
-                .addComponent(facturerParticulieJP, javax.swing.GroupLayout.DEFAULT_SIZE, 856, Short.MAX_VALUE))
+                .addComponent(facturerPorfessionnelJP, javax.swing.GroupLayout.DEFAULT_SIZE, 856, Short.MAX_VALUE))
         );
 
         bindingGroup.bind();
@@ -597,39 +602,42 @@ public class FacturerParticulier extends javax.swing.JFrame implements Sujet{
         //this.modelLigne.getLignes().clear();
     }//GEN-LAST:event_removePieceFactureJBActionPerformed
 
-    private void selectionnerParticulieJBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectionnerParticulieJBActionPerformed
-        changeCard(this.selecteurParticulieJP,"selectProfessionnelCard");
-    }//GEN-LAST:event_selectionnerParticulieJBActionPerformed
+    private void selectionnerProfessionnelJBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectionnerProfessionnelJBActionPerformed
+                changeCard(this.selecteurProfessionnelJP,"selectProfessionnelCard");
+                facture.setClient(null);
+                
+    }//GEN-LAST:event_selectionnerProfessionnelJBActionPerformed
 
-    private void particulierFactureJTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_particulierFactureJTableMouseClicked
-        changeCard(this.selecteurParticulieJP,"modificationProfessionnelJPCard");
-        int selectedRow = particulierFactureJTable.getSelectedRow();
-        TableModel model = particulierFactureJTable.getModel();
-        Particulie par =new Particulie(); 
+    private void professionnelFactureJTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_professionnelFactureJTableMouseClicked
+      changeCard(this.selecteurProfessionnelJP,"modificationProfessionnelJPCard");
+        int selectedRow = professionnelFactureJTable.getSelectedRow();
+        TableModel model = professionnelFactureJTable.getModel();
         
-        par.setId((Long) model.getValueAt(selectedRow,0));
-        par.setNom((String) model.getValueAt(selectedRow,1));
-        par.setPrenom((String) model.getValueAt(selectedRow,2));
-        par.setLieu((String) model.getValueAt(selectedRow,3));
-        par.setVille((String) model.getValueAt(selectedRow,4));
-        par.setCodePostal((String) model.getValueAt(selectedRow,5));
-        
-        facture.setClient(par);
+        Professionnel pro = new Professionnel();
+        pro.setId((Long) model.getValueAt(selectedRow, 0));
+        pro.setSiret((String) model.getValueAt(selectedRow, 1));
+        pro.setNomSociete((String) model.getValueAt(selectedRow, 2));
+        pro.setLieu((String) model.getValueAt(selectedRow, 3));
+        pro.setVille((String) model.getValueAt(selectedRow, 4));
+        pro.setCodePostal((String) model.getValueAt(selectedRow,5));
         
         
-    }//GEN-LAST:event_particulierFactureJTableMouseClicked
+        facture.setClient(pro);
+        
+        
+    }//GEN-LAST:event_professionnelFactureJTableMouseClicked
 
-    private void nomParticulierFactureJTFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nomParticulierFactureJTFActionPerformed
+    private void nomSocieteFactureJTFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nomSocieteFactureJTFActionPerformed
 
-        int column = 1;
+        int column = 2;
         
-        String nomSociete = this.nomParticulierFactureJTF.getText().toUpperCase(Locale.FRANCE);
+        String nomSociete = this.nomSocieteFactureJTF.getText().toUpperCase(Locale.FRANCE);
         
         RowFilter rowFilter = RowFilter.regexFilter(
             Pattern.compile(nomSociete,
                 Pattern.CASE_INSENSITIVE).toString(),column);
-        sorterParticulierFacturation.setRowFilter(rowFilter);
-    }//GEN-LAST:event_nomParticulierFactureJTFActionPerformed
+        sorterClientFacture.setRowFilter(rowFilter);
+    }//GEN-LAST:event_nomSocieteFactureJTFActionPerformed
 
     private void dateLivraisonJDateChooserPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_dateLivraisonJDateChooserPropertyChange
        
@@ -690,7 +698,7 @@ public class FacturerParticulier extends javax.swing.JFrame implements Sujet{
                 else
                 {
                     
-                    fs.addFactureParticulier(facture);
+                    fs.addFactureProfessionnel(facture);
                     for (Ligne l : facture.getLignes()) 
                     {
                             l.setFacture(facture);
@@ -899,7 +907,7 @@ public class FacturerParticulier extends javax.swing.JFrame implements Sujet{
    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addPieceFactureJB;
-    private javax.swing.JPanel conteneurParticulieJP;
+    private javax.swing.JPanel conteneurProfessionnelJP;
     private javax.swing.JLabel cpJL;
     private javax.swing.JLabel cpTitreJL;
     private com.toedter.calendar.JDateChooser dateLivraisonJDateChooser;
@@ -909,7 +917,7 @@ public class FacturerParticulier extends javax.swing.JFrame implements Sujet{
     private javax.swing.JRadioButton factureMPEspeceJRB;
     private javax.swing.JPanel factureMPJPanel;
     private javax.swing.JRadioButton factureMPVirementJRB;
-    private javax.swing.JPanel facturerParticulieJP;
+    private javax.swing.JPanel facturerPorfessionnelJP;
     private javax.swing.JTextField filtrePieceJTF;
     private javax.swing.JButton impressionFactureJB;
     private javax.swing.JLabel lieuJL;
@@ -917,25 +925,25 @@ public class FacturerParticulier extends javax.swing.JFrame implements Sujet{
     private javax.swing.JScrollPane lignesFactureJSP;
     private javax.swing.JTable lignesFactureJTable;
     private javax.swing.ButtonGroup modePayementBG;
-    private javax.swing.JPanel modificationParticulieFactureCardJP;
-    private javax.swing.JLabel nomFactureJL;
-    private javax.swing.JLabel nomJL;
-    private javax.swing.JTextField nomParticulierFactureJTF;
-    private javax.swing.JLabel nomTitreJL;
-    private javax.persistence.Query particulieQuery;
-    private java.util.List<facturation.entities.Client> particulielList;
-    private javax.swing.JScrollPane particulierFactureJSP;
-    private javax.swing.JTable particulierFactureJTable;
+    private javax.swing.JPanel modificationProfessionnelFactureCardJP;
+    private javax.swing.JLabel nomSocieteFactureJL;
+    private javax.swing.JTextField nomSocieteFactureJTF;
+    private javax.swing.JLabel nomSocieteJL;
+    private javax.swing.JLabel nomSocieteTitreJL;
     private java.util.List pieceList;
     private javax.persistence.Query pieceQuery;
-    private javax.swing.JLabel prenomJL;
-    private javax.swing.JLabel prenomTitreJL;
+    private javax.swing.JScrollPane professionnelFactureJSP;
+    private javax.swing.JTable professionnelFactureJTable;
+    private java.util.List<facturation.entities.Client> professionnelList;
+    private javax.persistence.Query professionnelQuery;
     private javax.swing.JButton removePieceFactureJB;
     private javax.swing.JButton sauvegardeFactureJB;
-    private javax.swing.JPanel selectParticulieFactureCardJP;
-    private javax.swing.JPanel selecteurParticulieJP;
+    private javax.swing.JPanel selectProfessionnelFactureCardJP;
     private javax.swing.JPanel selecteurPieceJP;
-    private javax.swing.JButton selectionnerParticulieJB;
+    private javax.swing.JPanel selecteurProfessionnelJP;
+    private javax.swing.JButton selectionnerProfessionnelJB;
+    private javax.swing.JLabel siretJL;
+    private javax.swing.JLabel siretTitreJL;
     private javax.swing.JScrollPane stockJSP;
     private javax.swing.JTable stockJTable;
     private javax.swing.JLabel villeJL;

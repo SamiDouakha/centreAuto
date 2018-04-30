@@ -23,18 +23,18 @@
         <Property name="observable" type="boolean" value="true"/>
       </Properties>
     </Component>
-    <Component class="javax.persistence.Query" name="particulieQuery">
+    <Component class="javax.persistence.Query" name="professionnelQuery">
       <Properties>
-        <Property name="query" type="java.lang.String" value="SELECT p FROM Particulie  p"/>
+        <Property name="query" type="java.lang.String" value="SELECT p FROM Professionnel p"/>
         <Property name="entityManager" type="java.lang.Object" editor="org.netbeans.modules.form.j2ee.J2EEPropertyModifier$EMProperty$EntityManagerEditor">
           <ComponentRef name="entityManager"/>
         </Property>
       </Properties>
     </Component>
-    <Component class="java.util.List" name="particulielList">
+    <Component class="java.util.List" name="professionnelList">
       <Properties>
         <Property name="query" type="java.lang.Object" editor="org.netbeans.modules.form.j2ee.J2EEPropertyModifier$QueryBeanProperty$QueryEditor">
-          <ComponentRef name="particulieQuery"/>
+          <ComponentRef name="professionnelQuery"/>
         </Property>
         <Property name="observable" type="boolean" value="true"/>
       </Properties>
@@ -47,7 +47,7 @@
   </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="2"/>
-    <Property name="title" type="java.lang.String" value="Facturer un particulier"/>
+    <Property name="title" type="java.lang.String" value="Facturer un professionnel"/>
     <Property name="size" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
       <Dimension value="[900, 720]"/>
     </Property>
@@ -71,20 +71,20 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="facturerParticulieJP" alignment="1" pref="1189" max="32767" attributes="0"/>
+          <Component id="facturerPorfessionnelJP" alignment="1" pref="1189" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
-              <Component id="facturerParticulieJP" pref="856" max="32767" attributes="0"/>
+              <Component id="facturerPorfessionnelJP" pref="856" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Container class="javax.swing.JPanel" name="facturerParticulieJP">
+    <Container class="javax.swing.JPanel" name="facturerPorfessionnelJP">
       <Properties>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.EtchedBorderInfo">
@@ -102,23 +102,26 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="136" max="-2" attributes="0"/>
-                  <Component id="impressionFactureJB" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="32767" attributes="0"/>
-                  <Component id="sauvegardeFactureJB" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="87" max="-2" attributes="0"/>
-              </Group>
-              <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="selecteurPieceJP" max="32767" attributes="0"/>
+              <Group type="102" alignment="1" attributes="0">
+                  <Group type="103" groupAlignment="1" attributes="0">
                       <Group type="102" attributes="0">
-                          <Component id="conteneurParticulieJP" max="32767" attributes="0"/>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="impressionFactureJB" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
+                          <Component id="sauvegardeFactureJB" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" attributes="0">
+                          <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="factureMPJPanel" linkSize="8" alignment="1" max="-2" attributes="0"/>
-                              <Component id="dateLivraisonJDateChooser" linkSize="8" alignment="1" min="-2" pref="177" max="-2" attributes="0"/>
+                              <Component id="selecteurPieceJP" max="32767" attributes="0"/>
+                              <Group type="102" attributes="0">
+                                  <Component id="conteneurProfessionnelJP" max="32767" attributes="0"/>
+                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="factureMPJPanel" linkSize="8" alignment="1" max="-2" attributes="0"/>
+                                      <Component id="dateLivraisonJDateChooser" linkSize="8" alignment="1" min="-2" pref="177" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
                           </Group>
                       </Group>
                   </Group>
@@ -132,7 +135,7 @@
                   <Group type="103" groupAlignment="1" max="-2" attributes="0">
                       <Group type="102" alignment="1" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="conteneurParticulieJP" min="-2" max="-2" attributes="0"/>
+                          <Component id="conteneurProfessionnelJP" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
                           <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
@@ -154,14 +157,14 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Container class="javax.swing.JPanel" name="conteneurParticulieJP">
+        <Container class="javax.swing.JPanel" name="conteneurProfessionnelJP">
 
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
                       <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
-                      <Component id="selecteurParticulieJP" max="32767" attributes="0"/>
+                      <Component id="selecteurProfessionnelJP" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -169,18 +172,18 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
-                      <Component id="selecteurParticulieJP" min="-2" pref="217" max="-2" attributes="0"/>
+                      <Component id="selecteurProfessionnelJP" min="-2" pref="217" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Container class="javax.swing.JPanel" name="selecteurParticulieJP">
+            <Container class="javax.swing.JPanel" name="selecteurProfessionnelJP">
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.DesignCardLayout"/>
               <SubComponents>
-                <Container class="javax.swing.JPanel" name="selectParticulieFactureCardJP">
+                <Container class="javax.swing.JPanel" name="selectProfessionnelFactureCardJP">
                   <Properties>
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                       <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
@@ -204,11 +207,11 @@
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="particulierFactureJSP" pref="948" max="32767" attributes="0"/>
+                                  <Component id="professionnelFactureJSP" pref="948" max="32767" attributes="0"/>
                                   <Group type="102" attributes="0">
-                                      <Component id="nomFactureJL" min="-2" max="-2" attributes="0"/>
+                                      <Component id="nomSocieteFactureJL" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="nomParticulierFactureJTF" min="-2" pref="331" max="-2" attributes="0"/>
+                                      <Component id="nomSocieteFactureJTF" min="-2" pref="331" max="-2" attributes="0"/>
                                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
@@ -221,38 +224,38 @@
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="nomFactureJL" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="nomParticulierFactureJTF" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="nomSocieteFactureJL" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="nomSocieteFactureJTF" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="particulierFactureJSP" min="-2" pref="97" max="-2" attributes="0"/>
+                              <Component id="professionnelFactureJSP" min="-2" pref="97" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
                   </Layout>
                   <SubComponents>
-                    <Component class="javax.swing.JTextField" name="nomParticulierFactureJTF">
+                    <Component class="javax.swing.JTextField" name="nomSocieteFactureJTF">
                       <Properties>
                         <Property name="columns" type="int" value="40"/>
                       </Properties>
                       <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="nomParticulierFactureJTFActionPerformed"/>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="nomSocieteFactureJTFActionPerformed"/>
                       </Events>
                     </Component>
-                    <Component class="javax.swing.JLabel" name="nomFactureJL">
+                    <Component class="javax.swing.JLabel" name="nomSocieteFactureJL">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="Filtrer par nom"/>
+                        <Property name="text" type="java.lang.String" value="Filtrer par nom de la soci&#xe9;t&#xe9;"/>
                       </Properties>
                     </Component>
-                    <Container class="javax.swing.JScrollPane" name="particulierFactureJSP">
+                    <Container class="javax.swing.JScrollPane" name="professionnelFactureJSP">
                       <AuxValues>
                         <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
                       </AuxValues>
 
                       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
                       <SubComponents>
-                        <Component class="javax.swing.JTable" name="particulierFactureJTable">
+                        <Component class="javax.swing.JTable" name="professionnelFactureJTable">
                           <Properties>
                             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
                               <TableColumnModel selectionModel="0">
@@ -289,27 +292,25 @@
                               </TableColumnModel>
                             </Property>
                             <Property name="rowSorter" type="javax.swing.RowSorter" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                              <Connection code="sorterParticulierFacturation" type="code"/>
+                              <Connection code="sorterClientFacture" type="code"/>
                             </Property>
                             <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
                               <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
                             </Property>
                           </Properties>
                           <BindingProperties>
-                            <BindingProperty name="elements" source="particulielList" target="particulierFactureJTable" targetPath="elements" updateStrategy="0" immediately="true">
+                            <BindingProperty name="elements" source="professionnelList" target="professionnelFactureJTable" targetPath="elements" updateStrategy="0" immediately="true">
                               <Subbinding sourcePath="${id}">
-                                <BindingParameter name="NAME" value="N&#xb0; Particulier"/>
+                                <BindingParameter name="NAME" value="N&#xb0; Professionel"/>
                                 <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="Long.class"/>
                                 <BindingParameter name="javax.swing.binding.ParameterKeys.EDITABLE" value="false"/>
                               </Subbinding>
-                              <Subbinding sourcePath="${nom}">
-                                <BindingParameter name="NAME" value="Nom"/>
-                                <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="String.class"/>
+                              <Subbinding sourcePath="${siret}">
+                                <BindingParameter name="NAME" value="SIRET"/>
                                 <BindingParameter name="javax.swing.binding.ParameterKeys.EDITABLE" value="false"/>
                               </Subbinding>
-                              <Subbinding sourcePath="${prenom}">
-                                <BindingParameter name="NAME" value="Pr&#xe9;nom"/>
-                                <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="String.class"/>
+                              <Subbinding sourcePath="${nomSociete}">
+                                <BindingParameter name="NAME" value="Soci&#xe8;t&#xe9;"/>
                                 <BindingParameter name="javax.swing.binding.ParameterKeys.EDITABLE" value="false"/>
                               </Subbinding>
                               <Subbinding sourcePath="${adresse.lieu}">
@@ -330,14 +331,14 @@
                             </BindingProperty>
                           </BindingProperties>
                           <Events>
-                            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="particulierFactureJTableMouseClicked"/>
+                            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="professionnelFactureJTableMouseClicked"/>
                           </Events>
                         </Component>
                       </SubComponents>
                     </Container>
                   </SubComponents>
                 </Container>
-                <Container class="javax.swing.JPanel" name="modificationParticulieFactureCardJP">
+                <Container class="javax.swing.JPanel" name="modificationProfessionnelFactureCardJP">
                   <Properties>
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                       <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
@@ -367,15 +368,15 @@
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
                                       <EmptySpace min="12" pref="12" max="-2" attributes="0"/>
-                                      <Component id="nomTitreJL" linkSize="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="nomSocieteTitreJL" linkSize="3" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="nomJL" linkSize="2" min="-2" pref="336" max="-2" attributes="0"/>
+                                      <Component id="nomSocieteJL" linkSize="2" min="-2" pref="336" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
                                       <EmptySpace min="12" pref="12" max="-2" attributes="0"/>
-                                      <Component id="prenomTitreJL" linkSize="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="siretTitreJL" linkSize="3" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="prenomJL" linkSize="2" min="-2" pref="372" max="-2" attributes="0"/>
+                                      <Component id="siretJL" linkSize="2" min="-2" pref="372" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
                                       <EmptySpace min="12" pref="12" max="-2" attributes="0"/>
@@ -392,7 +393,7 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="villeJL" linkSize="2" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
-                              <Component id="selectionnerParticulieJB" min="-2" pref="192" max="-2" attributes="0"/>
+                              <Component id="selectionnerProfessionnelJB" min="-2" pref="192" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                           </Group>
                       </Group>
@@ -406,15 +407,15 @@
                                       <Group type="103" groupAlignment="1" attributes="0">
                                           <Group type="102" alignment="1" attributes="0">
                                               <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Component id="nomTitreJL" linkSize="1" min="-2" max="-2" attributes="0"/>
-                                                  <Component id="nomJL" linkSize="1" min="-2" pref="23" max="-2" attributes="0"/>
+                                                  <Component id="nomSocieteTitreJL" linkSize="1" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="nomSocieteJL" linkSize="1" min="-2" pref="23" max="-2" attributes="0"/>
                                               </Group>
-                                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                                              <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
                                               <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Component id="prenomTitreJL" linkSize="1" min="-2" max="-2" attributes="0"/>
-                                                  <Component id="prenomJL" linkSize="1" min="-2" pref="17" max="-2" attributes="0"/>
+                                                  <Component id="siretTitreJL" linkSize="1" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="siretJL" linkSize="1" min="-2" pref="17" max="-2" attributes="0"/>
                                               </Group>
-                                              <EmptySpace max="-2" attributes="0"/>
+                                              <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
                                               <Component id="lieuJL" linkSize="1" min="-2" max="-2" attributes="0"/>
                                           </Group>
                                           <Component id="lieuTitreJL" linkSize="1" min="-2" max="-2" attributes="0"/>
@@ -424,62 +425,64 @@
                                   </Group>
                                   <Component id="cpTitreJL" linkSize="1" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="103" groupAlignment="1" attributes="0">
-                                      <Component id="villeJL" linkSize="1" min="-2" max="-2" attributes="0"/>
-                                      <Component id="villeTiteJL" linkSize="1" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Component id="selectionnerParticulieJB" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="1" attributes="0">
+                                  <Component id="villeJL" linkSize="1" min="-2" max="-2" attributes="0"/>
+                                  <Component id="villeTiteJL" linkSize="1" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="32767" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="1" attributes="0">
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Component id="selectionnerProfessionnelJB" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
                   </Layout>
                   <SubComponents>
-                    <Component class="javax.swing.JLabel" name="prenomJL">
+                    <Component class="javax.swing.JLabel" name="nomSocieteJL">
                       <BindingProperties>
-                        <BindingProperty name="text" source="particulierFactureJTable" sourcePath="${selectedElement.prenom}" target="prenomJL" targetPath="text" updateStrategy="0" immediately="false"/>
+                        <BindingProperty name="text" source="professionnelFactureJTable" sourcePath="${selectedElement.nom}" target="nomSocieteJL" targetPath="text" updateStrategy="0" immediately="false"/>
                       </BindingProperties>
                     </Component>
-                    <Component class="javax.swing.JLabel" name="nomJL">
+                    <Component class="javax.swing.JLabel" name="siretJL">
                       <BindingProperties>
-                        <BindingProperty name="text" source="particulierFactureJTable" sourcePath="${selectedElement.nom}" target="nomJL" targetPath="text" updateStrategy="0" immediately="false"/>
+                        <BindingProperty name="text" source="professionnelFactureJTable" sourcePath="${selectedElement.prenom}" target="siretJL" targetPath="text" updateStrategy="0" immediately="false"/>
                       </BindingProperties>
-                    </Component>
-                    <Component class="javax.swing.JLabel" name="nomTitreJL">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="Nom"/>
-                      </Properties>
-                    </Component>
-                    <Component class="javax.swing.JLabel" name="prenomTitreJL">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="Prenom"/>
-                      </Properties>
                     </Component>
                     <Component class="javax.swing.JLabel" name="lieuJL">
                       <BindingProperties>
-                        <BindingProperty name="text" source="particulierFactureJTable" sourcePath="${selectedElement.adresse.lieu}" target="lieuJL" targetPath="text" updateStrategy="0" immediately="false"/>
+                        <BindingProperty name="text" source="professionnelFactureJTable" sourcePath="${selectedElement.adresse.lieu}" target="lieuJL" targetPath="text" updateStrategy="0" immediately="false"/>
                       </BindingProperties>
                     </Component>
                     <Component class="javax.swing.JLabel" name="cpJL">
                       <BindingProperties>
-                        <BindingProperty name="text" source="particulierFactureJTable" sourcePath="${selectedElement.adresse.cp}" target="cpJL" targetPath="text" updateStrategy="0" immediately="false"/>
+                        <BindingProperty name="text" source="professionnelFactureJTable" sourcePath="${selectedElement.adresse.cp}" target="cpJL" targetPath="text" updateStrategy="0" immediately="false"/>
                       </BindingProperties>
                     </Component>
                     <Component class="javax.swing.JLabel" name="villeJL">
                       <BindingProperties>
-                        <BindingProperty name="text" source="particulierFactureJTable" sourcePath="${selectedElement.adresse.ville}" target="villeJL" targetPath="text" updateStrategy="0" immediately="false"/>
+                        <BindingProperty name="text" source="professionnelFactureJTable" sourcePath="${selectedElement.adresse.ville}" target="villeJL" targetPath="text" updateStrategy="0" immediately="false"/>
                       </BindingProperties>
                     </Component>
-                    <Component class="javax.swing.JButton" name="selectionnerParticulieJB">
+                    <Component class="javax.swing.JButton" name="selectionnerProfessionnelJB">
                       <Properties>
                         <Property name="text" type="java.lang.String" value="retour au choix du client"/>
                       </Properties>
                       <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="selectionnerParticulieJBActionPerformed"/>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="selectionnerProfessionnelJBActionPerformed"/>
                       </Events>
+                    </Component>
+                    <Component class="javax.swing.JLabel" name="nomSocieteTitreJL">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Soci&#xe9;t&#xe9;"/>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JLabel" name="siretTitreJL">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="N&#xb0; SIRET"/>
+                      </Properties>
                     </Component>
                     <Component class="javax.swing.JLabel" name="lieuTitreJL">
                       <Properties>
