@@ -129,21 +129,16 @@ public class FacturerParticulier extends javax.swing.JFrame implements Sujet{
         factureMPEspeceJRB = new javax.swing.JRadioButton();
         factureMPChequeJRB = new javax.swing.JRadioButton();
         factureMPVirementJRB = new javax.swing.JRadioButton();
-        selecteurPieceCardJP = new javax.swing.JPanel();
-        selectPieceCard = new javax.swing.JPanel();
+        selecteurPieceJP = new javax.swing.JPanel();
         stockJSP = new javax.swing.JScrollPane();
         stockJTable = new javax.swing.JTable();
         addPieceFactureJB = new javax.swing.JButton();
         removePieceFactureJB = new javax.swing.JButton();
-        validerSelectionJB = new javax.swing.JButton();
         filtrePieceJTF = new javax.swing.JTextField();
         lignesFactureJSP = new javax.swing.JScrollPane();
         lignesFactureJTable = new javax.swing.JTable();
         designationPiceJL = new javax.swing.JLabel();
-        modificationPieceCard = new javax.swing.JPanel();
-        selectionPieceJB = new javax.swing.JButton();
-        selectedLignesCard = new javax.swing.JPanel();
-        sauvgardeFactureJB = new javax.swing.JButton();
+        sauvegardeFactureJB = new javax.swing.JButton();
         impressionFactureJB = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -210,7 +205,7 @@ public class FacturerParticulier extends javax.swing.JFrame implements Sujet{
             .addGroup(selectParticulieFactureCardJPLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(selectParticulieFactureCardJPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(particulierFactureJSP, javax.swing.GroupLayout.DEFAULT_SIZE, 871, Short.MAX_VALUE)
+                    .addComponent(particulierFactureJSP, javax.swing.GroupLayout.DEFAULT_SIZE, 948, Short.MAX_VALUE)
                     .addGroup(selectParticulieFactureCardJPLayout.createSequentialGroup()
                         .addComponent(nomFactureJL)
                         .addGap(18, 18, 18)
@@ -226,7 +221,7 @@ public class FacturerParticulier extends javax.swing.JFrame implements Sujet{
                     .addComponent(nomFactureJL)
                     .addComponent(nomParticulierFactureJTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(particulierFactureJSP, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(particulierFactureJSP, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -292,15 +287,16 @@ public class FacturerParticulier extends javax.swing.JFrame implements Sujet{
                         .addGap(12, 12, 12)
                         .addComponent(lieuTitreJL)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lieuJL))
-                    .addGroup(modificationParticulieFactureCardJPLayout.createSequentialGroup()
-                        .addGap(12, 12, 12)
-                        .addComponent(villeTiteJL)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(villeJL)
-                        .addGap(70, 70, 70)
-                        .addComponent(selectionnerParticulieJB, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(lieuJL)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(modificationParticulieFactureCardJPLayout.createSequentialGroup()
+                .addGap(12, 12, 12)
+                .addComponent(villeTiteJL)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(villeJL)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(selectionnerParticulieJB, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         modificationParticulieFactureCardJPLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {cpJL, lieuJL, nomJL, prenomJL, villeJL});
@@ -310,7 +306,7 @@ public class FacturerParticulier extends javax.swing.JFrame implements Sujet{
         modificationParticulieFactureCardJPLayout.setVerticalGroup(
             modificationParticulieFactureCardJPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(modificationParticulieFactureCardJPLayout.createSequentialGroup()
-                .addGap(24, 24, 24)
+                .addGap(12, 12, 12)
                 .addGroup(modificationParticulieFactureCardJPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(modificationParticulieFactureCardJPLayout.createSequentialGroup()
                         .addGroup(modificationParticulieFactureCardJPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -353,7 +349,8 @@ public class FacturerParticulier extends javax.swing.JFrame implements Sujet{
             conteneurParticulieJPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(conteneurParticulieJPLayout.createSequentialGroup()
                 .addGap(5, 5, 5)
-                .addComponent(selecteurParticulieJP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(selecteurParticulieJP, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         dateLivraisonJDateChooser.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Date de livraison", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Dialog", 3, 12))); // NOI18N
@@ -432,10 +429,7 @@ public class FacturerParticulier extends javax.swing.JFrame implements Sujet{
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        selecteurPieceCardJP.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        selecteurPieceCardJP.setLayout(new java.awt.CardLayout());
-
-        selectPieceCard.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Selcetion des pièces a facturées", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.TOP));
+        selecteurPieceJP.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Selcetion des pièces a facturées", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.TOP));
 
         stockJSP.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Piéces en stock", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.TOP));
 
@@ -457,21 +451,14 @@ public class FacturerParticulier extends javax.swing.JFrame implements Sujet{
             }
         });
 
-        validerSelectionJB.setText("Valider la Selection ");
-        validerSelectionJB.setEnabled(false);
-        validerSelectionJB.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                validerSelectionJBActionPerformed(evt);
-            }
-        });
-
         filtrePieceJTF.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 filtrePieceJTFActionPerformed(evt);
             }
         });
 
-        lignesFactureJTable.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        lignesFactureJSP.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Lignes de la facture", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.TOP));
+
         lignesFactureJTable.setModel(modelLigne);
         lignesFactureJTable.setFocusTraversalPolicy(lignesFactureJTable.getFocusTraversalPolicy());
         lignesFactureJTable.setRowHeight(19);
@@ -480,103 +467,53 @@ public class FacturerParticulier extends javax.swing.JFrame implements Sujet{
 
         designationPiceJL.setText("Designation");
 
-        javax.swing.GroupLayout selectPieceCardLayout = new javax.swing.GroupLayout(selectPieceCard);
-        selectPieceCard.setLayout(selectPieceCardLayout);
-        selectPieceCardLayout.setHorizontalGroup(
-            selectPieceCardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(selectPieceCardLayout.createSequentialGroup()
-                .addContainerGap(18, Short.MAX_VALUE)
-                .addGroup(selectPieceCardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(selectPieceCardLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(validerSelectionJB)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(selectPieceCardLayout.createSequentialGroup()
-                        .addGroup(selectPieceCardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(selectPieceCardLayout.createSequentialGroup()
-                                .addComponent(designationPiceJL)
-                                .addGap(42, 42, 42)
-                                .addComponent(filtrePieceJTF, javax.swing.GroupLayout.PREFERRED_SIZE, 327, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(stockJSP))
-                        .addGap(28, 28, 28)
-                        .addGroup(selectPieceCardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(addPieceFactureJB, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(removePieceFactureJB, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(27, 27, 27)
-                        .addComponent(lignesFactureJSP, javax.swing.GroupLayout.PREFERRED_SIZE, 483, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(40, 40, 40))))
-        );
-        selectPieceCardLayout.setVerticalGroup(
-            selectPieceCardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(selectPieceCardLayout.createSequentialGroup()
-                .addContainerGap(17, Short.MAX_VALUE)
-                .addGroup(selectPieceCardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, selectPieceCardLayout.createSequentialGroup()
-                        .addGroup(selectPieceCardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(filtrePieceJTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(designationPiceJL))
+        javax.swing.GroupLayout selecteurPieceJPLayout = new javax.swing.GroupLayout(selecteurPieceJP);
+        selecteurPieceJP.setLayout(selecteurPieceJPLayout);
+        selecteurPieceJPLayout.setHorizontalGroup(
+            selecteurPieceJPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(selecteurPieceJPLayout.createSequentialGroup()
+                .addGroup(selecteurPieceJPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(selecteurPieceJPLayout.createSequentialGroup()
+                        .addComponent(designationPiceJL)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(selectPieceCardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(selectPieceCardLayout.createSequentialGroup()
+                        .addComponent(filtrePieceJTF, javax.swing.GroupLayout.PREFERRED_SIZE, 327, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(80, 80, 80))
+                    .addComponent(stockJSP, javax.swing.GroupLayout.PREFERRED_SIZE, 522, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(selecteurPieceJPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(addPieceFactureJB, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(removePieceFactureJB, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lignesFactureJSP))
+        );
+        selecteurPieceJPLayout.setVerticalGroup(
+            selecteurPieceJPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, selecteurPieceJPLayout.createSequentialGroup()
+                .addGroup(selecteurPieceJPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, selecteurPieceJPLayout.createSequentialGroup()
+                        .addGap(28, 28, 28)
+                        .addComponent(lignesFactureJSP))
+                    .addGroup(selecteurPieceJPLayout.createSequentialGroup()
+                        .addGroup(selecteurPieceJPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(selecteurPieceJPLayout.createSequentialGroup()
+                                .addGroup(selecteurPieceJPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(filtrePieceJTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(designationPiceJL))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(stockJSP, javax.swing.GroupLayout.PREFERRED_SIZE, 460, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(selecteurPieceJPLayout.createSequentialGroup()
+                                .addGap(45, 45, 45)
                                 .addComponent(addPieceFactureJB)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(removePieceFactureJB))
-                            .addComponent(stockJSP)))
-                    .addComponent(lignesFactureJSP, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(validerSelectionJB)
+                                .addComponent(removePieceFactureJB)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addGap(12, 12, 12))
         );
 
-        selectPieceCardLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {lignesFactureJSP, stockJSP});
-
-        selecteurPieceCardJP.add(selectPieceCard, "selectPieceCard");
-
-        modificationPieceCard.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "choix des quantitées et des prix", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.TOP));
-
-        selectionPieceJB.setText("Retour sur la séléction ");
-        selectionPieceJB.addActionListener(new java.awt.event.ActionListener() {
+        sauvegardeFactureJB.setText("Enregistrer");
+        sauvegardeFactureJB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                selectionPieceJBActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout modificationPieceCardLayout = new javax.swing.GroupLayout(modificationPieceCard);
-        modificationPieceCard.setLayout(modificationPieceCardLayout);
-        modificationPieceCardLayout.setHorizontalGroup(
-            modificationPieceCardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(modificationPieceCardLayout.createSequentialGroup()
-                .addContainerGap(933, Short.MAX_VALUE)
-                .addComponent(selectionPieceJB)
-                .addContainerGap())
-        );
-        modificationPieceCardLayout.setVerticalGroup(
-            modificationPieceCardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(modificationPieceCardLayout.createSequentialGroup()
-                .addGap(471, 471, 471)
-                .addComponent(selectionPieceJB)
-                .addContainerGap(28, Short.MAX_VALUE))
-        );
-
-        selecteurPieceCardJP.add(modificationPieceCard, "modificationPieceCard");
-
-        javax.swing.GroupLayout selectedLignesCardLayout = new javax.swing.GroupLayout(selectedLignesCard);
-        selectedLignesCard.setLayout(selectedLignesCardLayout);
-        selectedLignesCardLayout.setHorizontalGroup(
-            selectedLignesCardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1124, Short.MAX_VALUE)
-        );
-        selectedLignesCardLayout.setVerticalGroup(
-            selectedLignesCardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 551, Short.MAX_VALUE)
-        );
-
-        selecteurPieceCardJP.add(selectedLignesCard, "slectedLignesCard");
-
-        sauvgardeFactureJB.setText("Enregistrer");
-        sauvgardeFactureJB.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                sauvgardeFactureJBActionPerformed(evt);
+                sauvegardeFactureJBActionPerformed(evt);
             }
         });
 
@@ -592,20 +529,22 @@ public class FacturerParticulier extends javax.swing.JFrame implements Sujet{
         facturerParticulieJPLayout.setHorizontalGroup(
             facturerParticulieJPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(facturerParticulieJPLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(facturerParticulieJPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGap(136, 136, 136)
+                .addComponent(impressionFactureJB)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(sauvegardeFactureJB)
+                .addGap(87, 87, 87))
+            .addGroup(facturerParticulieJPLayout.createSequentialGroup()
+                .addGap(12, 12, 12)
+                .addGroup(facturerParticulieJPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(selecteurPieceJP, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(facturerParticulieJPLayout.createSequentialGroup()
                         .addComponent(conteneurParticulieJP, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(facturerParticulieJPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(dateLivraisonJDateChooser, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(factureMPJPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(facturerParticulieJPLayout.createSequentialGroup()
-                        .addComponent(impressionFactureJB)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(sauvgardeFactureJB))
-                    .addComponent(selecteurPieceCardJP, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(factureMPJPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(dateLivraisonJDateChooser, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(2, 2, 2))
         );
 
         facturerParticulieJPLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {dateLivraisonJDateChooser, factureMPJPanel});
@@ -613,37 +552,35 @@ public class FacturerParticulier extends javax.swing.JFrame implements Sujet{
         facturerParticulieJPLayout.setVerticalGroup(
             facturerParticulieJPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(facturerParticulieJPLayout.createSequentialGroup()
-                .addGroup(facturerParticulieJPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(conteneurParticulieJP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(facturerParticulieJPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(facturerParticulieJPLayout.createSequentialGroup()
-                        .addGap(6, 6, 6)
+                        .addContainerGap()
+                        .addComponent(conteneurParticulieJP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(facturerParticulieJPLayout.createSequentialGroup()
+                        .addGap(21, 21, 21)
                         .addComponent(dateLivraisonJDateChooser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(factureMPJPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
-                .addComponent(selecteurPieceCardJP, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(selecteurPieceJP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(facturerParticulieJPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(sauvgardeFactureJB)
+                    .addComponent(sauvegardeFactureJB)
                     .addComponent(impressionFactureJB))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(facturerParticulieJP, javax.swing.GroupLayout.DEFAULT_SIZE, 1154, Short.MAX_VALUE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(facturerParticulieJP, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1189, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(facturerParticulieJP, javax.swing.GroupLayout.DEFAULT_SIZE, 835, Short.MAX_VALUE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, 0)
+                .addComponent(facturerParticulieJP, javax.swing.GroupLayout.DEFAULT_SIZE, 856, Short.MAX_VALUE))
         );
 
         bindingGroup.bind();
@@ -660,11 +597,6 @@ public class FacturerParticulier extends javax.swing.JFrame implements Sujet{
         //this.modelLigne.getLignes().clear();
     }//GEN-LAST:event_removePieceFactureJBActionPerformed
 
-    private void selectionPieceJBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectionPieceJBActionPerformed
-        changeCard(this.selecteurPieceCardJP,"selectPieceCard");
-        this.modelLigne.getLignes().clear();
-    }//GEN-LAST:event_selectionPieceJBActionPerformed
-
     private void selectionnerParticulieJBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectionnerParticulieJBActionPerformed
         changeCard(this.selecteurParticulieJP,"selectProfessionnelCard");
     }//GEN-LAST:event_selectionnerParticulieJBActionPerformed
@@ -673,18 +605,17 @@ public class FacturerParticulier extends javax.swing.JFrame implements Sujet{
         changeCard(this.selecteurParticulieJP,"modificationProfessionnelJPCard");
         int selectedRow = particulierFactureJTable.getSelectedRow();
         TableModel model = particulierFactureJTable.getModel();
+        Particulie par =new Particulie(); 
         
-        Particulie par = new Particulie();
-        par.setId((Long) model.getValueAt(selectedRow, 0));
-        par.setNom((String) model.getValueAt(selectedRow, 1));
-        par.setPrenom((String) model.getValueAt(selectedRow, 2));
-        par.setLieu((String) model.getValueAt(selectedRow, 3));
-        par.setVille((String) model.getValueAt(selectedRow, 4));
+        par.setId((Long) model.getValueAt(selectedRow,0));
+        par.setNom((String) model.getValueAt(selectedRow,1));
+        par.setPrenom((String) model.getValueAt(selectedRow,2));
+        par.setLieu((String) model.getValueAt(selectedRow,3));
+        par.setVille((String) model.getValueAt(selectedRow,4));
         par.setCodePostal((String) model.getValueAt(selectedRow,5));
         
-        
         facture.setClient(par);
-         
+        
         
     }//GEN-LAST:event_particulierFactureJTableMouseClicked
 
@@ -726,8 +657,9 @@ public class FacturerParticulier extends javax.swing.JFrame implements Sujet{
         
     }//GEN-LAST:event_factureMPChequeJRBActionPerformed
 
-    private void sauvgardeFactureJBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sauvgardeFactureJBActionPerformed
-       if(facture.getClient()==null)
+    private void sauvegardeFactureJBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sauvegardeFactureJBActionPerformed
+       facture.setLignes(modelLigne.getLignes());
+        if(facture.getClient()==null)
        {    displayError("le client a facturé non pas etait saisie");
        
        }
@@ -774,7 +706,7 @@ public class FacturerParticulier extends javax.swing.JFrame implements Sujet{
         }    
        }
         
-    }//GEN-LAST:event_sauvgardeFactureJBActionPerformed
+    }//GEN-LAST:event_sauvegardeFactureJBActionPerformed
 
     private void impressionFactureJBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_impressionFactureJBActionPerformed
         ffs.createFileFacture(facture);
@@ -792,20 +724,6 @@ public class FacturerParticulier extends javax.swing.JFrame implements Sujet{
         this.sorterStock.setRowFilter(rowFilter);
         
     }//GEN-LAST:event_filtrePieceJTFActionPerformed
-
-    private void validerSelectionJBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_validerSelectionJBActionPerformed
-        changeCard(this.selecteurPieceCardJP,"modificationPieceCard");
-
-        /*List<Piece> pieces = modelSelectedPiece.getPieces();
-        Ligne l ;
-        for(Piece p : pieces)
-        {
-            l = new Ligne(p,p.getPrixVente(),0);
-            modelLigne.addLigne(l);
-        }*/
-        facture.setLignes(modelLigne.getLignes());
-
-    }//GEN-LAST:event_validerSelectionJBActionPerformed
 
       public void selectPiece(){
         int [] rows = this.stockJTable.getSelectedRows();
@@ -838,11 +756,13 @@ public class FacturerParticulier extends javax.swing.JFrame implements Sujet{
          
          if(modelLigne.getLignes().isEmpty())
          {
-             validerSelectionJB.setEnabled(false);
+             sauvegardeFactureJB.setEnabled(false);
+             impressionFactureJB.setEnabled(false);
          }
          else
          {
-             validerSelectionJB.setEnabled(true);
+             sauvegardeFactureJB.setEnabled(true);
+             impressionFactureJB.setEnabled(true);
          }
     }
     
@@ -850,9 +770,8 @@ public class FacturerParticulier extends javax.swing.JFrame implements Sujet{
         int [] rows = this.lignesFactureJTable.getSelectedRows();
         
         Piece p = new Piece() ;
-        System.out.println(" 853 FactureParticulier rows.this.lignesFactureJTable.getSelectedRows"+rows.length);
         for(int i = 0 ;i<rows.length;i++)
-        {  System.out.println(i);
+        {  
             
           //probleme de concurence si 
           // le deuxieme utilisateur creer une ligne il vas modifier les quantite qui ne serons pas lu par
@@ -870,22 +789,25 @@ public class FacturerParticulier extends javax.swing.JFrame implements Sujet{
           {
             this.modelPiece.addPiece(p);
           }
-          modelLigne.removeLigne(rows[i]);
+          
           p = new Piece() ;
         }
         
-        /* for(int i = rows.length-1  ; i>-1; i--)
+         for(int i = rows.length-1  ; i>-1; i--)
          { 
-           this.modelSelectedPiece.removePiece(rows[i]);
-         }*/
+           modelLigne.removeLigne(rows[i]);
+       
+         }
          
-          if(modelLigne.getLignes().isEmpty())
+        if(modelLigne.getLignes().isEmpty())
          {
-             validerSelectionJB.setEnabled(false);
+             sauvegardeFactureJB.setEnabled(false);
+             impressionFactureJB.setEnabled(false);
          }
          else
          {
-             validerSelectionJB.setEnabled(true);
+             sauvegardeFactureJB.setEnabled(true);
+             impressionFactureJB.setEnabled(true);
          }
     
     }
@@ -996,7 +918,6 @@ public class FacturerParticulier extends javax.swing.JFrame implements Sujet{
     private javax.swing.JTable lignesFactureJTable;
     private javax.swing.ButtonGroup modePayementBG;
     private javax.swing.JPanel modificationParticulieFactureCardJP;
-    private javax.swing.JPanel modificationPieceCard;
     private javax.swing.JLabel nomFactureJL;
     private javax.swing.JLabel nomJL;
     private javax.swing.JTextField nomParticulierFactureJTF;
@@ -1010,17 +931,13 @@ public class FacturerParticulier extends javax.swing.JFrame implements Sujet{
     private javax.swing.JLabel prenomJL;
     private javax.swing.JLabel prenomTitreJL;
     private javax.swing.JButton removePieceFactureJB;
-    private javax.swing.JButton sauvgardeFactureJB;
+    private javax.swing.JButton sauvegardeFactureJB;
     private javax.swing.JPanel selectParticulieFactureCardJP;
-    private javax.swing.JPanel selectPieceCard;
-    private javax.swing.JPanel selectedLignesCard;
     private javax.swing.JPanel selecteurParticulieJP;
-    private javax.swing.JPanel selecteurPieceCardJP;
-    private javax.swing.JButton selectionPieceJB;
+    private javax.swing.JPanel selecteurPieceJP;
     private javax.swing.JButton selectionnerParticulieJB;
     private javax.swing.JScrollPane stockJSP;
     private javax.swing.JTable stockJTable;
-    private javax.swing.JButton validerSelectionJB;
     private javax.swing.JLabel villeJL;
     private javax.swing.JLabel villeTiteJL;
     private org.jdesktop.beansbinding.BindingGroup bindingGroup;
