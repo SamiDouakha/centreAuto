@@ -109,8 +109,8 @@ class HeaderContentEventHandler implements IEventHandler
             String dateFacture = this.facture.getDate_facturation();
             
             String numerotation = numFacture+"\nEditée le "+dateFacture;
-            String societe = "SASU Cirta Pièces Auto\n"+
-                             "16 RUE LECONTE DE LISLE\n"+
+            String societe = "SAS Cirta Pièces Auto\n"+
+                             "15 AVENUE MARIE REYNOARD\n"+
                              "38100 GRENOBLE FRANCE";
                     
             String coordonnees ="SIRET 53921747200014\nTél 07-78-82-12-42\nE-mail akhandist@gmail.com"; 
