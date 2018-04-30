@@ -62,8 +62,7 @@ public class LigneTableModel extends AbstractTableModel{
     
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        System.out.println("LigneTableModel 65 getValueAt rowIndex "+rowIndex);
-        System.out.println("LigneTableModel 66 getValueAt columnIndex "+rowIndex);
+       
         switch(columnIndex){
            case 0:
                  return lignes.get(rowIndex).getPiece().getId_piece();

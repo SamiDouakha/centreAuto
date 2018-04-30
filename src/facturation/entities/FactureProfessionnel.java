@@ -48,10 +48,13 @@ public class FactureProfessionnel extends Facture implements Serializable  {
         
         }
     
-        String nom  = "facture-pro"+this.getId_facture()+"-"+this.extraireJour()+"-"+this.extraireMois()+"-"+annee+".pdf";
+        String nomFichier  = "facture-pro"+this.getId_facture()+"-"+this.extraireJour()+"-"+this.extraireMois()+"-"+annee+".pdf";
         Professionnel p = (Professionnel) this.getClient();
         String nomSociete =  p.getNomSociete();
-     return Paths.get("Professionnels",nomSociete ,annee,mois_string ,nom);
+        
+       
+        
+     return Paths.get("Professionnels",nomSociete ,annee,mois_string ,nomFichier);
    }
    
    
