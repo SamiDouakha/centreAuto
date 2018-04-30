@@ -45,7 +45,7 @@ public class FacturerParticulier extends javax.swing.JFrame implements Sujet{
     protected int lignesIndex = 0; 
     protected Facture selectedFacture;
     protected FactureFileService ffs;
-    protected Process p;
+    
     
     protected Professionnel selectedProfessionnel;  
     protected List<Ligne> lignes=new ArrayList<>();

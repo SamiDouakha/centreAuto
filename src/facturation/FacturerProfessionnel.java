@@ -7,10 +7,8 @@ package facturation;
 
 import facturation.entities.Client;
 import facturation.entities.Facture;
-import facturation.entities.FactureParticulier;
 import facturation.entities.FactureProfessionnel;
 import facturation.entities.Ligne;
-import facturation.entities.Particulie;
 import facturation.entities.Piece;
 import facturation.entities.Professionnel;
 import facturation.service.FacturationService;
@@ -45,7 +43,7 @@ public class FacturerProfessionnel extends javax.swing.JFrame implements Sujet{
     protected int lignesIndex = 0; 
     protected Facture selectedFacture;
     protected FactureFileService ffs;
-    protected Process p;
+   
     
     protected Professionnel selectedProfessionnel;  
     protected List<Ligne> lignes=new ArrayList<>();
