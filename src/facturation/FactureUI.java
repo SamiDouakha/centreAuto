@@ -1627,7 +1627,9 @@ public class FactureUI extends javax.swing.JFrame implements Observateur{
 
     private void ajouterFactureProfessionnelJBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ajouterFactureProfessionnelJBActionPerformed
          
-            FacturerProfessionnel f = new FacturerProfessionnel(fs,ffs);
+            //FacturerProfessionnel f = new FacturerProfessionnel(fs,ffs);
+            
+             FacturerProfessionnel f = new FacturerProfessionnel(fs,ffs);
                 f.ajouterObservateur(this);
                 f.setVisible(true);
       
