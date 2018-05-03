@@ -82,24 +82,39 @@ class HeaderContentEventHandler implements IEventHandler
             PdfCanvas canvas = new PdfCanvas(pageCourante);
             String client = "";
             String siret = "";
+            String lieu =  this.facture.getClient().getAdresse().getLieu();
+            
+            lieu = (lieu==null) ? "" : lieu ;
+            String cp = this.facture.getClient().getAdresse().getCp();
+            cp = (cp==null) ? "" : cp ;
+            
+            String ville = this.facture.getClient().getAdresse().getVille();
+            ville = (ville==null) ? "" : ville ;
+            
+            String adresse ="";
+            
+            String dateLivraison = "Date de livraison: "+this.facture.getDate_livraison();
             if(facture instanceof FactureParticulier )
             {   String nom = ((Particulie)this.facture.getClient()).getNom();
                 String prenom = ((Particulie)this.facture.getClient()).getPrenom();
-                client = "DÉSTINATAIRE: "+nom+" "+prenom+"\n";
+                client = nom+" "+prenom+"\n";
+                dateLivraison="";
+                
+                if(!lieu.isEmpty()&& !ville.isEmpty()&& !cp.isEmpty())
+                {
+                   adresse= lieu+"\n"+cp+" "+ville+" FRANCE";
+                }
             }
             else
             {   
                 String nomSociete = ((Professionnel)this.facture.getClient()).getNomSociete();
                 siret = "\nN°SIRET: "+((Professionnel)this.facture.getClient()).getSiret()+"\n";
                 client="SOCIÉTÉ: "+nomSociete+"\n";
-                
+                adresse= lieu+"\n"+cp+" "+ville+" FRANCE";
                 
             }
             
-            String lieu =  this.facture.getClient().getAdresse().getLieu();
-            String cp = this.facture.getClient().getAdresse().getCp();
-            String ville = this.facture.getClient().getAdresse().getVille()+" FRANCE";
-            String adresse = lieu+"\n"+cp+" "+ville;
+            
             
             float contantWidth = pageWidth-document.getRightMargin()-document.getLeftMargin();
          
@@ -108,7 +123,7 @@ class HeaderContentEventHandler implements IEventHandler
             numFacture = "Facture N° "+facture.getNumero_facture();
             String dateFacture = this.facture.getDate_facturation();
             
-            String numerotation = numFacture+"\nEditée le "+dateFacture;
+            String numerotation = numFacture+"\nÉtablie le "+dateFacture;
             String societe = "SAS Cirta Pièces Auto\n"+
                              "15 AVENUE MARIE REYNOARD\n"+
                              "38100 GRENOBLE FRANCE";
@@ -120,7 +135,7 @@ class HeaderContentEventHandler implements IEventHandler
                 "Tout incident de paiement est passible d'intérêt de retard ,"+
                 "le montant des pénalités résulte de l'application aux sommes restant dues d'un taux d'intérêt légal en vigueur au moment de l'incident.\n\n"+
                 "Indemnité forfaitaire pour frais de recouvrement due au créancier en cas de retard de paiement: 40€"; 
-            String dateLivraison = "Date de livraison: "+this.facture.getDate_livraison();
+            
             String modeReglement = "Mode de règlement: "+this.facture.getMode_payement();
             
            
@@ -132,7 +147,7 @@ class HeaderContentEventHandler implements IEventHandler
             zoneClient.setFont(font_bold);
             
             Paragraph zoneLogo = new Paragraph().setBorderBottom(new SolidBorder(1)).add(logo);
-            zoneLogo.setWidth(logoWidth);//.setBorder(new SolidBorder(1));
+            zoneLogo.setWidth(logoWidth);
            
             Paragraph zoneSociete = new Paragraph(societe)
                     .setFont(font_bold).add("\n\n"+coordonnees);

@@ -25,7 +25,7 @@ public class ChampCodePostal extends Champ{
         Constraint tv = new TypeDouble( "le champ " + name + " doit etre un nombre à virgule",this.type );
         this.add(tv);
         
-        Constraint lv = new MaxLengthValidator( "le champ " + name + " doit etre un nombre à virgule",10 );
+        Constraint lv = new MaxLengthValidator( "le champ " + name + "un nombre avec 10 chiffres au maximum",10 );
         this.add(lv);
     }
     

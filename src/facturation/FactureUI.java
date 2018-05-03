@@ -226,6 +226,14 @@ public class FactureUI extends javax.swing.JFrame implements Observateur{
         rechercheFactureProfessionnelJTF = new javax.swing.JTextField();
         dateFacturationProfessionnelJRB = new javax.swing.JRadioButton();
         dateLivraisonProfessionnelJRB = new javax.swing.JRadioButton();
+        infosJP = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable2 = new javax.swing.JTable();
         appJMenuBar = new javax.swing.JMenuBar();
         accueilJM = new javax.swing.JMenu();
         piecesJMI = new javax.swing.JMenuItem();
@@ -1332,7 +1340,74 @@ public class FactureUI extends javax.swing.JFrame implements Observateur{
 
         facturesJTabbedPane.addTab("Facture Professionnel", factureProfessionnelJP);
 
-        facturesCardJP.add(facturesJTabbedPane, java.awt.BorderLayout.PAGE_START);
+        jLabel1.setText("Particuliers");
+
+        jLabel2.setText("Professionnels");
+
+        jLabel3.setText("Professionnel et Particuliers");
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null}
+            },
+            new String [] {
+                "CA", "CA HT", "TVA"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(jTable1);
+
+        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null}
+            },
+            new String [] {
+                "CA", "CA HT", "TVA"
+            }
+        ));
+        jScrollPane2.setViewportView(jTable2);
+
+        javax.swing.GroupLayout infosJPLayout = new javax.swing.GroupLayout(infosJP);
+        infosJP.setLayout(infosJPLayout);
+        infosJPLayout.setHorizontalGroup(
+            infosJPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(infosJPLayout.createSequentialGroup()
+                .addGap(55, 55, 55)
+                .addGroup(infosJPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 609, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(infosJPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 609, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(437, Short.MAX_VALUE))
+        );
+        infosJPLayout.setVerticalGroup(
+            infosJPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(infosJPLayout.createSequentialGroup()
+                .addGap(47, 47, 47)
+                .addComponent(jLabel1)
+                .addGap(26, 26, 26)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel3)
+                .addContainerGap(308, Short.MAX_VALUE))
+        );
+
+        facturesJTabbedPane.addTab("Infos", infosJP);
+
+        facturesCardJP.add(facturesJTabbedPane, java.awt.BorderLayout.PAGE_END);
         facturesJTabbedPane.getAccessibleContext().setAccessibleName("");
 
         getContentPane().add(facturesCardJP, "facturesCard");
@@ -2144,10 +2219,18 @@ public class FactureUI extends javax.swing.JFrame implements Observateur{
     private javax.swing.ButtonGroup filtrePieceBG;
     private javax.swing.ButtonGroup filtreProfessionnelBG;
     private javax.swing.ButtonGroup fitreParticulierBG;
+    private javax.swing.JPanel infosJP;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTable2;
     private javax.swing.JLabel lieuJL;
     private javax.swing.JScrollPane lieuJSP;
     private javax.swing.JTextArea lieuJTA;

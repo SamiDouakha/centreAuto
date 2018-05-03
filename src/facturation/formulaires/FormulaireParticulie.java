@@ -33,16 +33,33 @@ public class FormulaireParticulie extends Formulaire{
     {
             champNom = new ChampNom(nom);
             champPrenom = new ChampPrenom(prenom);
-            champVille = new ChampVille(ville);
-            champLieu = new ChampLieu(lieu);
-            champCodePostal= new ChampCodePostal(codePostal);
-            
-            
             this.champs.add(champNom);
             this.champs.add(champPrenom);
-            this.champs.add(champVille);
-            this.champs.add(champLieu);
-            this.champs.add(champCodePostal);
+            
+            
+            if(lieu==null)lieu="";
+            if(!lieu.isEmpty())
+            {
+                champLieu = new ChampLieu(lieu);
+                this.champs.add(champLieu);
+            }
+            
+            
+            if(ville==null)ville="";
+            if(!ville.isEmpty())
+            {
+             champVille = new ChampVille(ville);
+             this.champs.add(champVille);
+            }    
+            
+            if(codePostal==null)codePostal="";
+            
+           
+            if(!codePostal.isEmpty())    
+            {
+                champCodePostal= new ChampCodePostal(codePostal);
+                this.champs.add(champCodePostal);
+            }
             
             particulie = new Particulie();
                  
@@ -65,14 +82,20 @@ public class FormulaireParticulie extends Formulaire{
     }
 
      public String getVille() {
-        return champVille.getValue();
+        if(champVille==null)
+            return "";
+        else
+            return champVille.getValue();
     }
 
-    public void setVillee(String ville) {
+    public void setVille(String ville) {
         this.champVille.setValue(ville); 
     }
 
-    public String getLieu() {
+    public String getLieu() { 
+        if(champLieu==null)
+            return "";
+        else
         return champLieu.getValue();
     }
 
@@ -81,7 +104,10 @@ public class FormulaireParticulie extends Formulaire{
     }
 
     public String getCodePostal() {
-        return champCodePostal.getValue();
+         if(champCodePostal==null)
+            return "";
+        else
+            return champCodePostal.getValue();
     }
 
     public void setCodePostalSociete(String codePostal) {
