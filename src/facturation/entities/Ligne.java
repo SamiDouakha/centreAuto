@@ -54,12 +54,24 @@ public class Ligne implements Serializable {
    @Column(name = "QUANTITE",columnDefinition="int default '0'" )
    protected int quantite;
    
+   @Column(name ="RABAIS",columnDefinition="Decimal(5,2) default '00.00'")
+   protected Double rabais;
+   
+   @Column(name ="REMISE",columnDefinition="Decimal(5,2) default '00.00'")
+   protected Double remise;
+   
+   @Column(name ="RISTOURNE",columnDefinition="Decimal(5,2) default '00.00'")
+   protected Double ristourne;
    
    public Ligne(){
        
        piece = new Piece (); 
        this.quantite = 0;
        this.prixUHT = 0.0;
+       
+       this.rabais=0.0;
+       this.remise=0.0;
+       this.ristourne=0.0;
    }
    
     public Ligne( Piece p ,int quantite) {
@@ -100,6 +112,31 @@ public class Ligne implements Serializable {
         this.prixUHT = prixHT;
        changeSupport.firePropertyChange("prixUHT", oldPrixHT, prixHT);
     }
+
+    public Double getRabais() {
+        return rabais;
+    }
+
+    public void setRabais(Double rabais) {
+        this.rabais = rabais;
+    }
+
+    public Double getRemise() {
+        return remise;
+    }
+
+    public void setRemise(Double remise) {
+        this.remise = remise;
+    }
+
+    public Double getRistourne() {
+        return ristourne;
+    }
+
+    public void setRistourne(Double ristourne) {
+        this.ristourne = ristourne;
+    }
+    
     
     
 
@@ -132,7 +169,7 @@ public class Ligne implements Serializable {
         return (20.0/100.0);
     }
     public Double getMontantHT(){
-        return this.getPrixUHT()*this.getQuantite() ;
+        return (this.getPrixUHT()*this.getQuantite())*(1-this.remise)*(1-this.rabais)*(1-this.ristourne) ;
     }
     public Double getMontantTVA(){
         return this.getMontantHT()*(20.0/100.0);
