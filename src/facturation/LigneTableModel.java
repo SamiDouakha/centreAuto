@@ -22,9 +22,8 @@ public class LigneTableModel extends AbstractTableModel{
         "Marque",
         "Prix UHT",
         "Quantité commandée",
-        "Rabais %",
         "Remise %",
-        "Ristourne %"};
+        };
 
     public List<Ligne> getLignes() {
         return lignes;
@@ -81,12 +80,10 @@ public class LigneTableModel extends AbstractTableModel{
                  return lignes.get(rowIndex).getPrixUHT();
             case 4:
                 return lignes.get(rowIndex).getQuantite();
+        
             case 5:
-                 return lignes.get(rowIndex).getRabais()*100;
-            case 6:
                  return lignes.get(rowIndex).getRemise()*100;
-            case 7:
-                 return lignes.get(rowIndex).getRistourne()*100;
+           
             
             default:
                  throw new IllegalArgumentException();
@@ -109,12 +106,7 @@ public class LigneTableModel extends AbstractTableModel{
                return Integer.class;
             case 5:
                return Double.class;
-            case 6:
-               return Double.class;
-            case 7:
-               return Double.class;
-            
-            default:
+          default:
                 return Object.class;
         }
     }
@@ -182,19 +174,16 @@ public class LigneTableModel extends AbstractTableModel{
                 break;
                 
                 case 5:
-                     l.setRabais(((Double)aValue)/100);
-                break;
-                
-                case 6:
+               
                      l.setRemise(((Double)aValue)/100);
                 break;
                 
-                case 7:
-                     l.setRistourne(((Double)aValue)/100);
-                break;
+              
+            
                 
             }
-            this.fireTableCellUpdated(rowIndex,rowIndex);
+            this.fireTableCellUpdated(rowIndex,rowIndex); 
+            
             }
         }
 

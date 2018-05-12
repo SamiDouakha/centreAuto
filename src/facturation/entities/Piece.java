@@ -29,7 +29,7 @@ public class Piece implements Serializable {
     @Transient
     private PropertyChangeSupport changeSupport = new PropertyChangeSupport(this);
     @Transient
-    protected boolean selected;
+    protected Double cout;
     
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -56,8 +56,8 @@ public class Piece implements Serializable {
     
     @Column(name = "QUANTITE",columnDefinition="int(6) default '0'" )
     protected Integer quantite;
-  
-   public Piece() {
+    
+    public Piece() {
         this.reference = "";
         this.marque = "";
         this.designation = "";
@@ -147,10 +147,6 @@ public class Piece implements Serializable {
         changeSupport.firePropertyChange("quantite", oldQuantite, quantite);
     }
 
-  
-
-   
-
     public void addPropertyChangeListener(PropertyChangeListener listener) {
         changeSupport.addPropertyChangeListener(listener);
     }
@@ -174,13 +170,10 @@ public class Piece implements Serializable {
         return "Piece{ id_piece=" + id_piece + ", reference=" + reference + ", designation=" + designation + ", marque=" + marque + ", prixAchat=" + prixAchat + ", prixVente=" + prixVente + ", quantite=" + quantite + '}';
     }
 
-    public boolean isSelected() {
-        return selected;
+    public Double getCout() {
+        return this.prixAchat*this.quantite;
     }
 
-    public void setSelected(boolean selected) {
-        this.selected = selected;
-    }
     
     
     

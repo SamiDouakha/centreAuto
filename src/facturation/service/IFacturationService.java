@@ -98,4 +98,5 @@ public interface IFacturationService {
     public FactureProfessionnel consulterFactureProfessionnel(Long id_facture);
     
     public Long convertNumFactureToIdFacture(Long num_facture);
+    public Double valeurStockRestant();
 }

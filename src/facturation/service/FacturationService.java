@@ -352,6 +352,19 @@ public class FacturationService implements IFacturationService{
         return dao.consulterFactureProfessionnel(id_facture);
     }
 
+    @Override
+    public Double valeurStockRestant() {
+     List<Piece> pieces = this.findAllPiece();
+     Double valeur = 0.0 ; 
+     for(Piece piece : pieces)
+     {
+         valeur = valeur +piece.getCout();
+         
+     }
+     
+     return valeur;
+    }
+
    
   
 

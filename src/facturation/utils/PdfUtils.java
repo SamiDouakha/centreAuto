@@ -106,7 +106,7 @@ public class PdfUtils
             x =logoWidth-offSet;
             y = (pageHeight)-offSet;
             
-            fontSizeS = 8;
+            fontSizeS = 7;
             fontSizeM = 9;
             fontSizeL= 10;
             
@@ -122,7 +122,7 @@ public class PdfUtils
             this.document = new Document(pdf,ps);
             
             this.document.setProperty(Property.FONT, font);
-            this.document.setProperty(Property.FONT_SIZE,fontSizeM);
+            this.document.setProperty(Property.FONT_SIZE,fontSizeS);
             
             HeaderContentEventHandler  eventHeader = new HeaderContentEventHandler(document,this.facture,font_bold ,logo,offSet);
             pdf.addEventHandler(PdfDocumentEvent.END_PAGE, eventHeader);
@@ -223,14 +223,6 @@ public class PdfUtils
         
         String[] totauxHaders = new String[]{ "TOTAL","TOTAL TVA" ,"Net à Payer"};
         String[] totauxData = new String[]{dataTotal,dataTotalTva,datNet};
-        
-        
-        
-        
-        
-       
-        
-        
         
         String[]detailTvaHeaders =new String[]{"Base HT","TVA%","Montant TVA" };
         double[][] lignesTva = facture.getLignesDetailTva();
@@ -339,14 +331,15 @@ public class PdfUtils
             break;
                  
             case 2: 
-                com.itextpdf.kernel.color.Color myColor = new DeviceRgb(250, 250, 250);
+                
                 for (int i = 0; i < numberOfColumns ;i++)
                     {
-                        String p = lignes[indice_ligne][indice_tab][i];
+                        String contenu = lignes[indice_ligne][indice_tab][i];
                         Table table =  tables[indice_tab];
                         Cell cellule = table.getCell(0, i);
                         
-                        cellule.add(new Paragraph(p).setMargin(0).setHeight(offSet/2).setVerticalAlignment(VerticalAlignment.MIDDLE).setBackgroundColor(myColor).setPaddingLeft(3)).setPadding(0);
+                       // .setPadding(0).setVerticalAlignment(VerticalAlignment.MIDDLE).setHeight(offSet*2)
+                        cellule.add(new Paragraph(contenu).setHeight(offSet).setPadding(3).setVerticalAlignment(VerticalAlignment.MIDDLE)).setPadding(0);
                     } 
             break;
                  
@@ -367,12 +360,29 @@ public class PdfUtils
    {
             
            String  nProduit = ""+l.getPiece().getId_piece();
-           String designation = ""+l.getPiece().getDesignation();
+           
+           String reduction =""; 
+           if(l.getRabais()!=0.0)
+           {
+               reduction ="\nRabais:  "+String.format( "%,.2f", l.getRabais())+"%";
+           }
+           if(l.getRemise()!=0.0)
+           {
+               reduction +="\nRemise:  "+String.format( "%,.2f", l.getRemise())+"%";
+           }
+           if(l.getRistourne()!=0.0)
+           {
+               reduction +="\nRistourne:  "+String.format( "%,.2f", l.getRistourne())+"%";
+           }
+           
+           String designation = ""+l.getPiece().getDesignation()+reduction;
            String prix = String.format( "%,.2f€", l.getPrixUHT());
            String quantite = ""+l.getQuantite();
 
            String tva = String.format( "%,.2f", l.getTVA()*100);
            String montantHT = String.format( "%,.2f€", l.getMontantHT());
+          
+           
            return new String[]{
                 nProduit,designation, prix,quantite,tva,montantHT
             };
