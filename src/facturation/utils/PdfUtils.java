@@ -7,8 +7,9 @@ package facturation.utils;
 
 import com.itextpdf.io.font.FontConstants;
 import com.itextpdf.io.image.ImageDataFactory;
-import com.itextpdf.kernel.color.Color;
-import com.itextpdf.kernel.color.DeviceRgb;
+
+import com.itextpdf.kernel.colors.ColorConstants;
+
 import com.itextpdf.kernel.events.PdfDocumentEvent;
 import com.itextpdf.kernel.font.PdfFont;
 import com.itextpdf.kernel.font.PdfFontFactory;
@@ -16,8 +17,10 @@ import com.itextpdf.kernel.geom.PageSize;
 import com.itextpdf.kernel.pdf.PdfDocument;
 import com.itextpdf.kernel.pdf.PdfWriter;
 import com.itextpdf.layout.Document;
-import com.itextpdf.layout.border.Border;
-import com.itextpdf.layout.border.SolidBorder;
+import com.itextpdf.layout.borders.Border;
+import com.itextpdf.layout.borders.SolidBorder;
+
+
 import com.itextpdf.layout.element.Cell;
 import com.itextpdf.layout.element.Image;
 import com.itextpdf.layout.element.Paragraph;
@@ -284,14 +287,14 @@ public class PdfUtils
     {
        
        table.setVerticalAlignment(VerticalAlignment.MIDDLE);
-       table.setBorder(new SolidBorder(Color.BLACK,1));
+       table.setBorder(new SolidBorder(ColorConstants.BLACK,1));
        
        int nb_cols_header = data.length;
        
        for (int i = 0; i < nb_cols_header; i++) 
             {
                Cell headerCell =  new Cell().add( new Paragraph(headers[i]).setFont(font_bold) );
-               table.addCell(headerCell.setBorder(new SolidBorder(Color.BLACK,1)) );     
+               table.addCell(headerCell.setBorder(new SolidBorder(ColorConstants.BLACK,1)) );     
             }
         for (int i = 0; i < nb_cols_header; i++) 
             {

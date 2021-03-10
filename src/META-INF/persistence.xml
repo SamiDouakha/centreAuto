@@ -13,20 +13,10 @@
     <class>facturation.entities.FactureProfessionnel</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/centre_auto_pieces?zeroDateTimeBehavior=convertToNull"/>
-      <property name="javax.persistence.jdbc.user" value="root"/>
-      <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
+      <property name="javax.persistence.jdbc.user" value="sami"/>
+      <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
       <property name="javax.persistence.jdbc.password" value="samidouakha"/>
-    </properties>
-  </persistence-unit>
-  <persistence-unit name="pieces?zeroDateTimeBehavior=convertToNullPU" transaction-type="RESOURCE_LOCAL">
-    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-    <class>facturation.entities.Piece</class>
-    <class>facturation.entities.Client</class>
-    <properties>
-      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/pieces?zeroDateTimeBehavior=convertToNull"/>
-      <property name="javax.persistence.jdbc.user" value="root"/>
-      <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
-      <property name="javax.persistence.jdbc.password" value="samidouakha"/>
+      <property name="javax.persistence.schema-generation.database.action" value="create"/>
     </properties>
   </persistence-unit>
 </persistence>
